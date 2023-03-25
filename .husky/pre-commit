@@ -1,4 +1,40 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run eslint
+echo 'Styling, Testing and building project before commiting ....'
+
+# CHECK TSCONFIG STANDARDS
+yarn check-ts || 
+(
+  echo 'Failed Type Check.'
+  false;
+)
+
+# CHECK PRETTIER STANDARDS
+yarn check-format || 
+(
+  echo 'Failed formatting Check.'
+  false;
+)
+
+
+# CHECK ESLINT STANDARDS
+yarn check-eslint || 
+(
+  echo 'Failed Eslint Check.'
+  false;
+)
+
+# IF EVERY THINGS PASSES ... TRY TO RUN A BUILD
+echo 'Alright ... code looks good ... trying to build now'
+
+# CHECK BUILD STANDARDS
+yarn build || 
+(
+  echo 'Build Failed !!!'
+  false;
+)
+
+
+# IF BUILD SUCCESS THEN COMMITING
+echo 'Commiting nice code ....'

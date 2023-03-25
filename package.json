@@ -10,7 +10,11 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
     "prepare": "husky install",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check-ts": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "check-eslint": "eslint . --ext ts --ext tsx --ext js",
+    "check-ready": "yarn check-format && yarn check-lint && yarn check-ts && yarn build"
   },
   "dependencies": {
     "eslint": "^8.36.0",
