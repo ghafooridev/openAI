@@ -17,7 +17,7 @@ const openai = new OpenAIApi(configuration);
 
 export default async function handler(
   req: GenerateNextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<ResponseData>,
 ) {
   try {
     if (req.method !== "POST") {
@@ -25,11 +25,11 @@ export default async function handler(
       return;
     }
 
-    const prompt = req.body.prompt;
+    const { prompt } = req.body;
 
-    if (!prompt || prompt === "")
-      return new Response("please send your prompt", { status: 400 });
-
+    if (!prompt || prompt === "") {
+      res.status(400).json({ text: "please send your prompt" });
+    }
     const aiResult = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
@@ -39,8 +39,10 @@ export default async function handler(
       presence_penalty: 0,
     });
 
+    // eslint-disable-next-line operator-linebreak
     const response =
       aiResult.data.choices[0].text?.trim() || "Sorry, there was a problem!";
+
     res.status(200).json({ text: response });
   } catch (e: any) {
     console.log("error", e?.response.data.error);
