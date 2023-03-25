@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "check-ts": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
-    "check-eslint": "eslint . --ext ts --ext tsx --ext js",
+    "check-eslint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "check-ready": "yarn check-format && yarn check-lint && yarn check-ts && yarn build"
   },
   "dependencies": {
@@ -27,6 +27,8 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.5.0",
+    "@commitlint/config-conventional": "^17.4.4",
     "@types/node": "^18.15.9",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
@@ -41,9 +43,10 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
-    "tailwindcss": "^3.2.7",
-    "husky": "^8.0.0"
+    "tailwindcss": "^3.2.7"
   }
 }

@@ -22,7 +22,7 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["react", "@typescript-eslint", "prettier"], // prettier should be last of array
-  "ignorePatterns": ["tailwind.config.js", "next.config.js"],
+  "ignorePatterns": ["*.config.js", "*.config.cjs"],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "operator-linebreak": 0,
